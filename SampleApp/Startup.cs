@@ -49,10 +49,10 @@ namespace SampleApp
                 })
                 .AddOpenIdConnect("oidc", options =>
                 {
-                    options.Authority = "http://localhost:9011";
+                    options.Authority = Configuration["SampleApp:Authority"];
 
-                    options.ClientId = "TBD";
-                    options.ClientSecret = "TBD";
+                    options.ClientId = Configuration["SampleApp:ClientId"];
+                    options.ClientSecret = Configuration["SampleApp:ClientSecret"];
 
                     // code flow + PKCE (PKCE is turned on by default)
                     options.ResponseType = "code";
