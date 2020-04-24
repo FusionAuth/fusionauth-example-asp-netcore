@@ -6,8 +6,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Logging;
 
 namespace SampleApp
 {
@@ -23,7 +27,38 @@ namespace SampleApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages();
+            JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+            services.AddRazorPages()
+	         .AddRazorPagesOptions(options =>
+		  {
+		     options.Conventions.AuthorizePage("/Secure");
+	         });
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = "cookie";
+                options.DefaultChallengeScheme = "oidc";
+            })
+                .AddCookie("cookie", options =>
+                {
+                    options.Cookie.Name = "mycookie";
+
+                    options.Events.OnSigningOut = async e =>
+                    {
+                        await e.HttpContext.RevokeUserRefreshTokenAsync();
+                    };
+                })
+                .AddOpenIdConnect("oidc", options =>
+                {
+                    options.Authority = "http://localhost:9011";
+
+                    options.ClientId = "TBD";
+                    options.ClientSecret = "TBD";
+
+                    // code flow + PKCE (PKCE is turned on by default)
+                    options.ResponseType = "code";
+                    // options.UsePkce = true; // cycles
+                    options.RequireHttpsMetadata = false;
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,12 +79,15 @@ namespace SampleApp
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
             });
+	    IdentityModelEventSource.ShowPII = true;
         }
     }
 }
+
