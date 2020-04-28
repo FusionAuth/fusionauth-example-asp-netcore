@@ -51,9 +51,7 @@ namespace SampleApp
                     options.ClientId = Configuration["SampleApp:ClientId"];
                     options.ClientSecret = Configuration["SampleApp:ClientSecret"];
 
-                    // code flow + PKCE (PKCE is turned on by default)
                     options.ResponseType = "code";
-                    // options.UsePkce = true; // cycles
                     options.RequireHttpsMetadata = false;
                 });
         }
