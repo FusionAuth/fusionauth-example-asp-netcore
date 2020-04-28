@@ -28,11 +28,8 @@ namespace SampleApp
         public void ConfigureServices(IServiceCollection services)
         {
             JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
-            services.AddRazorPages()
-	         .AddRazorPagesOptions(options =>
-		  {
-		     options.Conventions.AuthorizePage("/Secure");
-	         });
+            services.AddRazorPages();
+
             services.AddAuthentication(options =>
             {
                 options.DefaultScheme = "cookie";
