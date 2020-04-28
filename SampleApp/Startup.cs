@@ -37,12 +37,7 @@ namespace SampleApp
             })
                 .AddCookie("cookie", options =>
                 {
-                    options.Cookie.Name = "mycookie";
-
-                    options.Events.OnSigningOut = async e =>
-                    {
-                        await e.HttpContext.RevokeUserRefreshTokenAsync();
-                    };
+                    options.Cookie.Name = Configuration["SampleApp:CookieName"];
                 })
                 .AddOpenIdConnect("oidc", options =>
                 {

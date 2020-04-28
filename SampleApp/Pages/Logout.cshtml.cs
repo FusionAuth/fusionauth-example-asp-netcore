@@ -25,10 +25,11 @@ namespace SampleApp.Pages
 	{
               SignOut("cookie", "oidc");
               var host = _configuration["SampleApp:Authority"];
+              var cookieName = _configuration["SampleApp:CookieName"];
 
               var clientId = _configuration["SampleApp:ClientId"];
               var url = host + "/oauth2/logout?client_id="+clientId;
-              Response.Cookies.Delete("mycookie");
+              Response.Cookies.Delete(cookieName);
               return Redirect(url);
         }
     }
