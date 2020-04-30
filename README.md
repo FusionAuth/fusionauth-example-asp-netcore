@@ -1,4 +1,4 @@
-# fusionauth-asp-dot-net-example
+# Example ASP.NET Core web application
 An ASP.NET Core web application using FusionAuth as the identity server
 
 One way to deploy and run:
