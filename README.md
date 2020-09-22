@@ -9,10 +9,10 @@ To deploy and run:
 
 * Open up a terminal (these instructions assume a `cmd` window)
 * `cd SampleApp`
-* update `appsettings.json` with the FusionAuth application `ClientId`
+* Update `appsettings.json` with the FusionAuth application `ClientId`
 * Export the client secret as an environment variable: `set SampleApp__ClientSecret="..."`
-* publish the binary: `dotnet publish -r win-x64`
-* `bin\Debug\netcoreapp3.1\win-x64\publish\SampleApp.exe`
+* Publish the binary: `dotnet publish -r win-x64`
+* Run the application: `bin\Debug\netcoreapp3.1\win-x64\publish\SampleApp.exe`
 
 Visit the local webserver at `http://localhost:5000/` and sign in.
 
