@@ -5,7 +5,7 @@ You need to have dotnetcore installed to run this code.
 
 Set up fusionauth as documented in the blog post. 
 
-To deploy and run:
+To deploy and run on Windows, assuming you have the dotnetcore 3.1 runtime installed:
 
 * Open up a terminal (these instructions assume a `cmd` window)
 * `cd SampleApp`
@@ -15,6 +15,13 @@ To deploy and run:
 * Run the application: `bin\Debug\netcoreapp3.1\win-x64\publish\SampleApp.exe`
 
 Visit the local webserver at `http://localhost:5000/` and sign in.
+
+To run on a macos, use the [scripts here](https://dotnet.microsoft.com/download/dotnet-core/scripts) to install dotnetcore. Do the first 3 steps above.
+
+Then run these commands instead of the last three:
+* `export SampleApp__ClientSecret="..."`
+* `dotnet publish -r osx.10.14-x64`
+* `bin/Debug/netcoreapp3.1/osx.10.14-x64/publish/SampleApp`
 
 See more deployment options: https://docs.microsoft.com/en-us/dotnet/core/deploying/
 
