@@ -9,7 +9,7 @@ To deploy and run on Windows, assuming you have the dotnetcore 3.1 runtime insta
 
 * Open up a terminal (these instructions assume a `cmd` window)
 * `cd SampleApp`
-* Update `appsettings.json` with the FusionAuth application `ClientId`
+* Update `appsettings.json` with the FusionAuth application `ClientId` and the `Authority` as necessary.
 * Export the client secret as an environment variable: `set SampleApp__ClientSecret="..."`
 * Publish the binary: `dotnet publish -r win-x64`
 * Run the application: `bin\Debug\netcoreapp3.1\win-x64\publish\SampleApp.exe`
