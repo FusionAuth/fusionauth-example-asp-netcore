@@ -28,6 +28,11 @@ namespace SampleApp
         public void ConfigureServices(IServiceCollection services)
         {
             JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
+            // Configure your policies
+            services.AddAuthorization(options =>
+                options.AddPolicy("Registered",
+                policy => policy.RequireClaim("applicationId", Configuration["SampleApp:ClientId"])));
             services.AddRazorPages();
 
             services.AddAuthentication(options =>
@@ -49,6 +54,7 @@ namespace SampleApp
                     options.ResponseType = "code";
                     options.RequireHttpsMetadata = false;
                 });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

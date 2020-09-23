@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace SampleApp.Pages
 {
-    [Authorize]
+    [Authorize(Policy = "Registered")]
     public class SecureModel : PageModel
     {
         private readonly ILogger<SecureModel> _logger;
