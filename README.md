@@ -5,8 +5,8 @@ and the PKCE extension to log users in. PKCE stands for Proof
 Key for Code Exchange, and is often pronounced “pixie”. The feature
 is enabled by default by the netcore oauth library.
 
-You need to have dotnetcore installed to run this code. If you
-are using a mac, use this command `brew cask install dotnet-sdk` to setup the development
+You need to have dotnetcore installed to run this code. Please note that this application uses netcore 5.0.
+If you are using a mac, use this command `brew cask install dotnet-sdk` to setup the development
 environment.
 
 Set up fusionauth as documented in the blog post. 

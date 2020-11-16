@@ -47,7 +47,6 @@ namespace SampleApp
                 .AddOpenIdConnect("oidc", options =>
                 {
                     options.Authority = Configuration["SampleApp:Authority"];
-
                     options.ClientId = Configuration["SampleApp:ClientId"];
                     options.ClientSecret = Configuration["SampleApp:ClientSecret"];
 
