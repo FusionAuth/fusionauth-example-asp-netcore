@@ -27,3 +27,4 @@ See more deployment options: https://docs.microsoft.com/en-us/dotnet/core/deploy
 
 See the blog post for more details about this code: [Securing an ASP.NET Core Razor Pages app with OAuth](https://fusionauth.io/blog/2020/05/06/securing-asp-netcore-razor-pages-app-with-oauth)
 
+We also have [a dotnetcore5 example application](https://github.com/FusionAuth/fusionauth-example-asp-netcore5).
