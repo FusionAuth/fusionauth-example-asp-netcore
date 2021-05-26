@@ -1,16 +1,16 @@
 # Example ASP.NET Core web application
 An ASP.NET Core web application using FusionAuth as the identity server.
 This application will use an OAuth Authorization Code workflow
-and the PKCE extension to log users in. PKCE stands for Proof
-Key for Code Exchange, and is often pronounced “pixie”. The feature
+and the PKCE extension to log users in. 
+
+PKCE stands for Proof Key for Code Exchange, and is often pronounced "pixie". The feature
 is enabled by default by the netcore oauth library.
 
-You need to have dotnetcore installed to run this code. Please note that this application uses netcore 5.0.
-If you are using a mac, use this command `brew cask install dotnet-sdk` to setup the development
-environment.
+You need to have dotnetcore installed to run this code. Please note that this application uses netcore 3.1.
 
-Set up fusionauth as documented in the blog post. 
+Set up FusionAuth as documented in the blog post. 
 
+## Windows Install
 To deploy and run on Windows, assuming you have the dotnetcore 3.1 runtime installed:
 
 * Open up a terminal (these instructions assume a `cmd` window)
@@ -22,12 +22,19 @@ To deploy and run on Windows, assuming you have the dotnetcore 3.1 runtime insta
 
 Visit the local webserver at `http://localhost:5000/` and sign in.
 
-To run on a macos, use the [scripts here](https://dotnet.microsoft.com/download/dotnet-core/scripts) to install dotnetcore. Do the first 3 steps above.
+## Mac Install
 
-Then run these commands instead of the last three:
+To run on a macos, use the [scripts here](https://dotnet.microsoft.com/download/dotnet-core/scripts) to install dotnetcore. 
+
+* `cd SampleApp`
+* Update `appsettings.json` with the FusionAuth application `ClientId` and the `Authority` as necessary.
 * `export SampleApp__ClientSecret="..."`
-* `dotnet publish -r osx.10.14-x64 -f net5.0`
+* `dotnet publish -r osx.10.14-x64`
 * `bin/Debug/netcoreapp3.1/osx.10.14-x64/publish/SampleApp`
+
+Visit the local webserver at `http://localhost:5000/` and sign in.
+
+## Misc
 
 See more deployment options: https://docs.microsoft.com/en-us/dotnet/core/deploying/
 
