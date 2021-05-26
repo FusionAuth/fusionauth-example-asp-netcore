@@ -1,10 +1,6 @@
 # Example ASP.NET Core web application
 An ASP.NET Core web application using FusionAuth as the identity server.
-This application will use an OAuth Authorization Code workflow
-and the PKCE extension to log users in. 
-
-PKCE stands for Proof Key for Code Exchange, and is often pronounced "pixie". The feature
-is enabled by default by the netcore oauth library.
+This application will use an OAuth Authorization Code workflow to log users in. 
 
 You need to have dotnetcore installed to run this code. Please note that this application uses netcore 3.1.
 
