@@ -1,7 +1,13 @@
 # Example ASP.NET Core web application
 An ASP.NET Core web application using FusionAuth as the identity server.
+This application will use an OAuth Authorization Code workflow
+and the PKCE extension to log users in. PKCE stands for Proof
+Key for Code Exchange, and is often pronounced “pixie”. The feature
+is enabled by default by the netcore oauth library.
 
-You need to have dotnetcore installed to run this code.
+You need to have dotnetcore installed to run this code. Please note that this application uses netcore 5.0.
+If you are using a mac, use this command `brew cask install dotnet-sdk` to setup the development
+environment.
 
 Set up fusionauth as documented in the blog post. 
 
@@ -20,7 +26,7 @@ To run on a macos, use the [scripts here](https://dotnet.microsoft.com/download/
 
 Then run these commands instead of the last three:
 * `export SampleApp__ClientSecret="..."`
-* `dotnet publish -r osx.10.14-x64`
+* `dotnet publish -r osx.10.14-x64 -f net5.0`
 * `bin/Debug/netcoreapp3.1/osx.10.14-x64/publish/SampleApp`
 
 See more deployment options: https://docs.microsoft.com/en-us/dotnet/core/deploying/
