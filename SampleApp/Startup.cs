@@ -2,11 +2,9 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Text.Json;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,20 +30,17 @@ namespace SampleApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-var loggerFactory = LoggerFactory.Create(builder =>
-{
-     builder.AddConsole();                
-});
+            var loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder.AddConsole();                
+            });
 
-ILogger logger = loggerFactory.CreateLogger<Startup>();
-logger.LogInformation("Example log message");
+            ILogger logger = loggerFactory.CreateLogger<Startup>();
             JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
             // Configure your policies
             services.AddAuthorization(options =>
-                options.AddPolicy("Registered",
-                //policy => policy.RequireClaim("aud", Configuration["SampleApp:ClientId"])));
-                policy => policy.RequireClaim("aud")));
+                options.AddPolicy("Registered", policy => policy.RequireClaim("aud", Configuration["SampleApp:ClientId"])));
             services.AddRazorPages();
 
             services.AddAuthentication(options =>
@@ -60,42 +55,13 @@ logger.LogInformation("Example log message");
                 .AddOpenIdConnect("oidc", options =>
                 {
 
-options.Events = new OpenIdConnectEvents
-    {
-
-        OnTokenResponseReceived = ctx =>
-        {
-            var handler = new JwtSecurityTokenHandler();
-            var jsonToken = handler.ReadJwtToken(ctx.TokenEndpointResponse.AccessToken);
-        logger.LogInformation("here");
-        logger.LogInformation("jsonToken: "+jsonToken);
-            
-        logger.LogInformation("jsonToken.Claims: "+JsonSerializer.Serialize(jsonToken.Claims));
-
-            //jsonToken.Claims <--here you go, update the ctx.Principal if necessary.
-
-
-            return Task.CompletedTask;
-        },
-        OnTokenValidated = ctx =>
-        {
-        logger.LogInformation("here2");
-   foreach (Claim claim in ctx.Principal.Claims)  
-   {  
-      logger.LogInformation("CLAIM TYPE: " + claim.Type + "; CLAIM VALUE: " + claim.Value + ","+claim);  
-   }  
-        //logger.LogInformation("ctx.Principal: "+JsonSerializer.Serialize(ctx.Principal));
-
-
-            return Task.CompletedTask;
-        }
-    };
-
                     options.Authority = Configuration["SampleApp:Authority"];
                     options.ClientId = Configuration["SampleApp:ClientId"];
                     options.ClientSecret = Configuration["SampleApp:ClientSecret"];
                     options.Scope.Add("openid");
-        	    options.ClaimActions.Remove("aud");
+
+                    // leave this in, otherwise the aud claim is removed. See https://stackoverflow.com/questions/69289426/missing-aud-claim-in-asp-net-core-policy-check-prevents-authorization-but-it for more
+                    options.ClaimActions.Remove("aud");
 
                     options.ResponseType = "code";
                     options.RequireHttpsMetadata = false;
